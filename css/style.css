@@ -134,8 +134,7 @@ nav a.active {
 /* Estilos para el encabezado principal (Hero Section) */
 .hero-section {
     position: relative; /* Es clave para que el contenido se posicione sobre la imagen */
-    width: 100vw; /* Ocupa el 100% del ancho de la ventana (viewport width) */
-    margin-left: calc(-50vw + 50%); /* Truco para centrar y expandir a pesar de cualquier contenedor padre */
+    width: 100%;
     height: 60vh; /* Altura de la sección (60% de la altura de la ventana de visualización) */
     background-image: url('../images/header.jpg'); /* Carga tu imagen de fondo */
     background-size: cover; /* Ajusta la imagen para cubrir todo el contenedor sin distorsionarse */
@@ -146,6 +145,7 @@ nav a.active {
     text-align: center; /* Centra el texto dentro del contenedor */
     color: #fff; /* Color del texto para que contraste con la imagen de fondo */
     box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.4); /* Capa oscura sobre la imagen para mejorar la legibilidad del texto */
+    margin-bottom: 40px;
 }
 
 /* Estilos para el contenedor de contenido */
