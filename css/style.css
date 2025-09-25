@@ -1,0 +1,133 @@
+body {
+    background-color: #f4f7f9; /* Un gris claro, más suave */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Una fuente más profesional */
+    color: #444; /* Un gris oscuro, menos agresivo que el negro */
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #1a535c; /* Un azul oscuro, que transmite confianza */
+    text-align: center;
+}
+
+h2 {
+    color: #1a535c;
+    border-bottom: 2px solid #5d9baf; /* Un azul más claro para el borde */
+    padding-bottom: 5px;
+}
+
+ul {
+    list-style-type: square;
+    margin-left: 20px;
+}
+.destacado {
+    font-weight: 600; /* Negrita con un grosor específico */
+    color: #5d9baf;
+}
+header, main, footer {
+    width: 90%;
+    max-width: 960px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+header {
+    margin-bottom: 20px;
+}
+
+main {
+    margin-bottom: 20px;
+}
+
+footer {
+    text-align: center;
+    font-size: 0.8em;
+    color: #777;
+}
+
+/* Opcional: Eliminar el padding del body que ya no es necesario */
+body {
+    padding: 0; 
+}
+
+/* Opcional: Centrar el h1 del header */
+header h1 {
+    margin-top: 0;
+}
+.button {
+    display: inline-block;
+    background-color: #1a535c;
+    color: #fff;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #0d3b66;
+}
+/* Estilos para la sección de la galería */
+.gallery-section {
+    padding: 40px 20px; /* Más espacio vertical para la sección */
+    text-align: center; /* Centra el título y el contenido */
+}
+
+.gallery-section h2 {
+    margin-bottom: 40px; /* Espacio debajo del título de la galería */
+    border-bottom: none; /* Quitamos el borde del h2 en esta sección si no lo queremos */
+    color: #1a535c; /* Aseguramos el color principal */
+}
+
+/* Contenedor principal de la galería - Usaremos Flexbox para organizar los items */
+.gallery-container {
+    display: flex; /* Habilitar Flexbox */
+    flex-wrap: wrap; /* Permitir que los items salten a la siguiente línea */
+    justify-content: center; /* Centrar los items horizontalmente */
+    gap: 30px; /* Espacio entre los items de la galería */
+    margin-top: 30px;
+}
+
+/* Estilos para cada item de la galería (imagen + nombre) */
+.gallery-item {
+    background-color: #ffffff;
+    border-radius: 10px; /* Bordes ligeramente redondeados para el contenedor del item */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width: 180px; /* Ancho fijo para cada item */
+    display: flex; /* Usar flexbox internamente para centrar contenido */
+    flex-direction: column; /* Apilar imagen y nombre verticalmente */
+    align-items: center; /* Centrar contenido horizontalmente */
+    justify-content: center; /* Centrar contenido verticalmente si hay espacio */
+    min-height: 250px; /* Altura mínima para que todos se vean similares */
+}
+
+/* Estilos para las imágenes de las flores - ¡Aquí viene el marco ovalado! */
+.gallery-item img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain; /* ¡Cambiado aquí! */
+    border-radius: 50%;
+    border: 3px solid #5d9baf;
+    margin-bottom: 15px;
+    background-color: #f0f0f0; /* Agregamos un color de fondo para las "barras" */
+}
+
+/* Estilos para el nombre del lector */
+.gallery-item p {
+    font-weight: 600;
+    color: #1a535c;
+    margin: 0; /* Quitar el margen por defecto de los párrafos */
+    font-size: 1.1em;
+}
+/* Estilo para el enlace de la página activa */
+nav a.active {
+    background-color: #1a535c; /* Un color más oscuro para la página actual */
+    pointer-events: none; /* Deshabilita el clic en el enlace activo */
+    cursor: default; /* Cambia el cursor a la flecha por defecto */
+}
