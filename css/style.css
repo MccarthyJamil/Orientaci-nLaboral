@@ -168,3 +168,18 @@ nav a.active {
     font-size: 1.2em;
     margin-bottom: 25px;
 }
+/* Media Query para dispositivos móviles (pantallas de hasta 768px de ancho) */
+@media (max-width: 768px) {
+    /* Ajustes para el encabezado principal (Hero Section) */
+    .hero-section {
+        height: 50vh; /* Reducir la altura para que no ocupe toda la pantalla en móviles */
+        box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.5); /* Aumentar la opacidad del color oscuro */
+        background-attachment: fixed; /* Fija la imagen de fondo para un mejor efecto visual y responsivo */
+    }
+
+    /* Ajustes para el título dentro del hero */
+    .hero-section h1 {
+        font-size: 2.2em; /* Reducir el tamaño del texto para que no se vea tan grande */
+        line-height: 1.3;
+    }
+}
