@@ -33,34 +33,34 @@ if (document.getElementById('gallery-container')) {
 }
 
 
-// CÓDIGO PARA EL CONTADOR DE DESCARGAS (SE EJECUTARÁ EN LA PÁGINA DE EMPLEABILIDAD)
-if (document.getElementById('download-button')) {
-    const downloadButton = document.getElementById('download-button');
-    const contadorElemento = document.createElement('p');
-    contadorElemento.className = 'contador';
-    downloadButton.parentNode.appendChild(contadorElemento);
+// CÓDIGO PARA EL CONTADOR DE DESCARGAS (ÚLTIMO INTENTO)
+if (document.getElementById('contador-box')) {
+    const contadorBox = document.getElementById('contador-box');
+    const contadorNumero = document.getElementById('contador-numero');
 
-    const API_ENDPOINT = 'https://api.countapi.xyz/hit/tu-guia-profesional/downloads';
+    // ¡CAMBIO CLAVE! Usamos HTTP en lugar de HTTPS para evitar posibles problemas
+    const API_ENDPOINT = 'http://api.countapi.xyz/get/tu-guia-profesional/descargas';
+    const API_INCREMENT = 'http://api.countapi.xyz/hit/tu-guia-profesional/descargas';
 
     async function actualizarContador() {
         try {
             const response = await fetch(API_ENDPOINT);
             const data = await response.json();
-            contadorElemento.textContent = `Descargas: ${data.value}`;
+            contadorNumero.textContent = data.value;
         } catch (error) {
             console.error('Error al obtener el contador:', error);
+            contadorNumero.textContent = 'Error';
         }
     }
 
-    async function manejarDescarga(event) {
+    async function contarDescarga() {
         try {
-            const response = await fetch(API_ENDPOINT + '/visits');
-            await response.json();
+            await fetch(API_INCREMENT);
         } catch (error) {
             console.error('Error al registrar la descarga:', error);
         }
     }
 
+    contarDescarga();
     actualizarContador();
-    downloadButton.addEventListener('click', manejarDescarga);
 }
