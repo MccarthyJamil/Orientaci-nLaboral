@@ -297,3 +297,48 @@ nav a.active {
     color: #1a535c;
     font-weight: 700;
 }
+/* Estilos para la sección de Noticias */
+.noticias-section {
+    padding: 20px;
+    text-align: center;
+}
+
+.noticias-section p {
+    margin-bottom: 40px;
+}
+
+.noticias-container {
+    display: flex;
+    flex-direction: column; /* Esto apila los recuadros en una columna */
+    gap: 25px; /* Espacio entre cada recuadro */
+    align-items: center; /* Centra los recuadros en la página */
+}
+
+.noticia-item {
+    background-color: #ffffff;
+    border-radius: 50px; /* ¡Esto crea la forma ovalada! */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 25px 40px;
+    text-decoration: none;
+    color: #444;
+    width: 100%;
+    max-width: 600px; /* Limita el ancho para que no se vea demasiado grande en pantallas grandes */
+    transition: transform 0.3s ease;
+    text-align: left; /* Alineamos el texto a la izquierda dentro del recuadro */
+}
+
+.noticia-item:hover {
+    transform: translateY(-5px); /* Efecto para destacar al pasar el cursor */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.noticia-item h3 {
+    color: #1a535c;
+    margin-top: 0;
+    font-size: 1.2em;
+}
+
+.noticia-item p {
+    margin-bottom: 0;
+    line-height: 1.5;
+}
