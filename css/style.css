@@ -1,3 +1,15 @@
+@font-face {
+    font-family: 'Scripter';
+    src: url('../fonts/Scripter.ttf') format('truetype');
+}
+@font-face {
+    font-family: '29LT Riwaya Informal';
+    src: url('../fonts/29lt-riwaya-regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'cooper bold';
+    src: url('../fonts/cooper-bt-bold-italic.ttf') format('truetype');
+}
 body {
     background-color: #f4f7f9;
     font-family: 'Roboto', sans-serif;
@@ -25,7 +37,11 @@ h1, h2 {
     color: #1a535c;
 }
 
-h1 {
+header h1 {
+    font-size: 3em;
+    color: #030303; /* Asegura que el color sea blanco para que se vea */
+    font-family: 'Scripter', cursive; /* Puedes cambiar esta tipografía después */
+    font-weight: 900;
     text-align: center;
 }
 
@@ -78,11 +94,13 @@ nav {
 
 nav a {
     text-decoration: none;
-    color: #1a535c;
+    color: #333333;
     font-weight: 700;
     padding: 8px 12px;
     border-radius: 5px;
     transition: background-color 0.3s ease;
+    font-family: '29LT Riwaya Informal', sans-serif; 
+    font-weight: normal; 
 }
 
 nav a:hover {
@@ -90,7 +108,7 @@ nav a:hover {
 }
 
 nav a.active {
-    background-color: #1a535c;
+    background-color: #cc779d;
     color: #fff;
     pointer-events: none;
     cursor: default;
@@ -168,6 +186,8 @@ nav a.active {
 .presentation-section h2 {
     border-bottom: none;
     margin-bottom: 10px;
+    font-family: 'Scripter', cursive;
+    font-size: 2.1em;
 }
 
 .presentation-section p {
@@ -176,6 +196,7 @@ nav a.active {
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+    font-family: 'cooper bold', cursive;
 }
 
 .circles-container {
@@ -202,7 +223,7 @@ nav a.active {
     height: 150px;
     object-fit: cover;
     border-radius: 50%;
-    border: 5px solid #5d9baf;
+    border: 5px solid #e2a9f1;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -367,4 +388,26 @@ nav a.active {
 .herramientas-item p {
     margin-bottom: 0;
     line-height: 1.5;
+}
+/* Estilos del contenedor del logo y el titulo */
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Mantiene el título en el centro */
+    position: relative; /* Clave para el posicionamiento del logo */
+    width: 100%;
+}
+
+/* Estilos para el logo */
+.logo {
+    position: absolute; /* Saca el logo del flujo */
+    left: 20px;
+    top: -1px; /* Coloca el logo a 20px del borde izquierdo */
+    height: 100px; /* Ajusta este valor si tu logo es muy grande o muy pequeño */
+}
+
+/* Ajuste del titulo para que el texto este centrado verticalmente con el logo */
+header h1 {
+    margin: 0;
+    line-height: 1; /* Esto ayuda a que el titulo se alinee mejor */
 }
