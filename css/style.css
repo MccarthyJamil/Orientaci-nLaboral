@@ -1,6 +1,20 @@
-/* Estilos generales del cuerpo y tipografía */
 body {
     background-color: #f4f7f9;
+    font-family: 'Roboto', sans-serif;
+    color: #444;
+    margin: 0;
+    padding: 0;
+    
+    /* Propiedades para la imagen de fondo */
+    background-image: url('../images/fondo.png'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+/* Estilos generales del cuerpo y tipografía */
+body {
+    background-color: #f5f5f5;
     font-family: 'Roboto', sans-serif;
     color: #444;
     margin: 0;
@@ -102,22 +116,34 @@ nav a.active {
 .hero-section {
     position: relative;
     width: 100%;
-    height: 60vh;
-    background-image: url('../images/header.jpg');
+    
+    /* Esta es la magia de la proporción fija para el encuadre */
+    padding-top: 56.25%; 
+    height: 0; 
+
+    /* La imagen de la cabecera, asegúrate que la ruta sea correcta */
+    background-image: url('../images/header.png');
     background-size: cover;
+    background-repeat: no-repeat;
     background-position: center;
+    background-color: #f7963d;
+    
+    margin-bottom: 40px;
+    border-radius: 50px;
+    overflow: hidden;
+}
+
+.hero-content {
+    /* Posicionamos el contenido (que ahora está vacío) para que no afecte la proporción */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: #fff;
-    box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.4);
-    margin-bottom: 40px;
-}
-
-.hero-content {
-    max-width: 800px;
-    padding: 20px;
 }
 
 .hero-section h1 {
@@ -298,23 +324,23 @@ nav a.active {
     font-weight: 700;
 }
 /* Estilos para la sección de Noticias */
-.noticias-section {
+.herramientas-section {
     padding: 20px;
     text-align: center;
 }
 
-.noticias-section p {
+.herramientas-section p {
     margin-bottom: 40px;
 }
 
-.noticias-container {
+.herramientas-container {
     display: flex;
     flex-direction: column; /* Esto apila los recuadros en una columna */
     gap: 25px; /* Espacio entre cada recuadro */
     align-items: center; /* Centra los recuadros en la página */
 }
 
-.noticia-item {
+.herramientas-item {
     background-color: #ffffff;
     border-radius: 50px; /* ¡Esto crea la forma ovalada! */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -327,18 +353,18 @@ nav a.active {
     text-align: left; /* Alineamos el texto a la izquierda dentro del recuadro */
 }
 
-.noticia-item:hover {
+.herramientas-item:hover {
     transform: translateY(-5px); /* Efecto para destacar al pasar el cursor */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-.noticia-item h3 {
+.herramientas-item h3 {
     color: #1a535c;
     margin-top: 0;
     font-size: 1.2em;
 }
 
-.noticia-item p {
+.herramientas-item p {
     margin-bottom: 0;
     line-height: 1.5;
 }
