@@ -1,5 +1,3 @@
-
-// Espera a que el contenido de la pagina se cargue completamente
 document.addEventListener('DOMContentLoaded', () => {
 
     // CÓDIGO PARA EL CONTADOR DE DESCARGAS
@@ -15,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Funcion para obtener y mostrar el numero del contador
         async function getCount() {
             try {
+                // Hacemos una llamada GET para OBTENER el numero
                 const response = await fetch(API_INFO_ENDPOINT);
                 const data = await response.json();
                 contadorNumero.textContent = data.value;
@@ -24,16 +23,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         
-        // Funcion para registrar la descarga
+        // Funcion para registrar la descarga y abrir la guia
         async function registerDownload(event) {
             // Evita que el navegador navegue a la URL del boton
             event.preventDefault();
 
             try {
                 // Llama a la API para AUMENTAR el contador en uno
-                await fetch(API_ENDPOINT);
+                await fetch(API_ENDPOINT, {
+                    method: 'POST' 
+                });
 
-                // !NUEVO: Abre el archivo en una nueva pestaña (simula la descarga)
+                // Abre el archivo en una nueva pestaña
                 window.open(downloadButton.href, '_blank');
                 
                 // Llama a la funcion para OBTENER y mostrar el nuevo numero
@@ -50,4 +51,3 @@ document.addEventListener('DOMContentLoaded', () => {
         downloadButton.addEventListener('click', registerDownload);
     }
 });
-//cambios ghj
