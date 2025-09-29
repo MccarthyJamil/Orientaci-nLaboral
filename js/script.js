@@ -31,36 +31,39 @@ if (document.getElementById('gallery-container')) {
         crearElementoGaleria(lector);
     });
 }
+// Espera a que el contenido de la pagina se cargue completamente
+document.addEventListener('DOMContentLoaded', () => {
 
+// CÓDIGO PARA EL CONTADOR DE DESCARGAS
+    // Se ejecuta solo si el contador existe en la página
+    if (document.getElementById('contador-box')) {
+        const contadorNumero = document.getElementById('contador-numero');
+        const downloadButton = document.getElementById('download-button');
+        
+        // Esta es la URL de la API que usaremos.
+        // Por favor, no la cambies
+        const API_ENDPOINT = 'https://api.countapi.xyz/hit/guia_descargas';
 
-// CÓDIGO PARA EL CONTADOR DE DESCARGAS (ÚLTIMO INTENTO)
-if (document.getElementById('contador-box')) {
-    const contadorBox = document.getElementById('contador-box');
-    const contadorNumero = document.getElementById('contador-numero');
-
-    // ¡CAMBIO CLAVE! Usamos HTTP en lugar de HTTPS para evitar posibles problemas
-    const API_ENDPOINT = 'http://api.countapi.xyz/get/tu-guia-profesional/descargas';
-    const API_INCREMENT = 'http://api.countapi.xyz/hit/tu-guia-profesional/descargas';
-
-    async function actualizarContador() {
-        try {
-            const response = await fetch(API_ENDPOINT);
-            const data = await response.json();
-            contadorNumero.textContent = data.value;
-        } catch (error) {
-            console.error('Error al obtener el contador:', error);
-            contadorNumero.textContent = 'Error';
+        // Funcion para actualizar el numero del contador
+        async function updateCount() {
+            try {
+                const response = await fetch(API_ENDPOINT);
+                const data = await response.json();
+                contadorNumero.textContent = data.value;
+            } catch (error) {
+                console.error('Error al obtener el contador:', error);
+                contadorNumero.textContent = '--';
+            }
         }
+
+        // Llamada inicial para que el contador se muestre al cargar la pagina
+        updateCount();
+
+        // Escuchamos el clic en el boton de descarga para actualizar el contador
+        downloadButton.addEventListener('click', () => {
+            // Se puede volver a llamar la funcion para actualizar el numero inmediatamente
+            updateCount();
+        });
     }
 
-    async function contarDescarga() {
-        try {
-            await fetch(API_INCREMENT);
-        } catch (error) {
-            console.error('Error al registrar la descarga:', error);
-        }
-    }
-
-    contarDescarga();
-    actualizarContador();
-}
+});
