@@ -1,20 +1,20 @@
+// Espera a que el contenido de la pagina se cargue completamente
 document.addEventListener('DOMContentLoaded', () => {
 
     // CÓDIGO PARA EL CONTADOR DE DESCARGAS
-    // Se ejecuta solo si el contador existe en la página
     if (document.getElementById('contador-box')) {
         const contadorNumero = document.getElementById('contador-numero');
         const downloadButton = document.getElementById('download-button');
         
-        // Esta es la URL de la API que usaremos.
-        const API_ENDPOINT = 'https://api.countapi.xyz/hit/guia_descargas';
-        const API_INFO_ENDPOINT = 'https://api.countapi.xyz/info/guia_descargas';
+        // Esta es la URL de la API que usamos para contar y obtener el valor.
+        const API_ENDPOINT_HIT = 'https://api.countapi.xyz/hit/guia_descargas';
+        const API_ENDPOINT_GET = 'https://api.countapi.xyz/get/guia_descargas';
 
         // Funcion para obtener y mostrar el numero del contador
         async function getCount() {
             try {
-                // Hacemos una llamada GET para OBTENER el numero
-                const response = await fetch(API_INFO_ENDPOINT);
+                // Hacemos una llamada GET para obtener el numero
+                const response = await fetch(API_ENDPOINT_GET);
                 const data = await response.json();
                 contadorNumero.textContent = data.value;
             } catch (error) {
@@ -23,24 +23,21 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         
-        // Funcion para registrar la descarga y abrir la guia
-        async function registerDownload(event) {
-            // Evita que el navegador navegue a la URL del boton
+        // Funcion para registrar el clic y abrir la guia
+        async function registerClick(event) {
             event.preventDefault();
 
             try {
-                // Llama a la API para AUMENTAR el contador en uno
-                await fetch(API_ENDPOINT, {
-                    method: 'POST' 
-                });
-
+                // Hacemos una llamada GET para aumentar el contador en uno
+                await fetch(API_ENDPOINT_HIT);
+                
                 // Abre el archivo en una nueva pestaña
                 window.open(downloadButton.href, '_blank');
                 
-                // Llama a la funcion para OBTENER y mostrar el nuevo numero
+                // Vuelve a llamar a la funcion para mostrar el nuevo numero
                 getCount();
             } catch (error) {
-                console.error('Error al registrar la descarga:', error);
+                console.error('Error al registrar el clic:', error);
             }
         }
 
@@ -48,6 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
         getCount();
 
         // Escuchamos el clic en el boton de descarga
-        downloadButton.addEventListener('click', registerDownload);
+        downloadButton.addEventListener('click', registerClick);
     }
 });
