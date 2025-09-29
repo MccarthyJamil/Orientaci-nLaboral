@@ -4,14 +4,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const contadorNumero = document.getElementById('contador-numero');
         const downloadButton = document.getElementById('download-button');
         
-        // Esta es la URL de TU API, que ahora está corriendo en tu computadora.
-        const API_URL = 'http://localhost:3000/api/contador';
+        const API_URL = 'https://api-contador-zenr.onrender.com'; // La URL base de tu API
 
-        // Funcion para obtener el numero actual del contador y mostrarlo en la pagina
         async function getCount() {
             try {
-                // Hacemos una llamada GET a nuestra propia API
-                const response = await fetch(API_URL);
+                // Llama a tu propia API para OBTENER el número
+                const response = await fetch(`${API_URL}/api/contador`);
                 const data = await response.json();
                 contadorNumero.textContent = data.count;
             } catch (error) {
@@ -20,13 +18,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         
-        // Funcion que se ejecuta cuando el usuario hace clic en el boton de descarga
-        async function registerDownload() {
+        async function registerDownload(event) {
+            // Previene que se abra la descarga de inmediato
+            event.preventDefault();
+
             try {
-                // Hacemos una llamada para AUMENTAR el contador en uno
-                await fetch('https://api.countapi.xyz/hit/guia_descargas');
+                // Llama a tu propia API para INCREMENTAR el número
+                await fetch(`${API_URL}/api/incrementar`);
+
+                // Después de incrementar, abre el archivo
+                window.open(downloadButton.href, '_blank');
                 
-                // Luego, actualizamos el numero del contador en la pantalla
+                // Y actualiza el número en pantalla
                 getCount();
             } catch (error) {
                 console.error('Error al registrar la descarga:', error);
@@ -36,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Llamada inicial para que el contador se muestre al cargar la pagina
         getCount();
 
-        // Escucha los clics en el boton de descarga y ejecuta la funcion `registerDownload`
+        // Escucha los clics en el boton de descarga
         downloadButton.addEventListener('click', registerDownload);
     }
 });
