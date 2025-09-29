@@ -411,3 +411,88 @@ header h1 {
     margin: 0;
     line-height: 1; /* Esto ayuda a que el titulo se alinee mejor */
 }
+/* Estilos para la sección de Proceso de Empleabilidad */
+#proceso-empleabilidad {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.section-description {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 40px;
+}
+
+.consejos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    justify-content: center;
+}
+
+.consejo-item {
+    text-align: center;
+}
+
+.consejo-shape {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    border-radius: 75px / 30px; /* Esto crea una forma ovalada */
+    overflow: hidden;
+    position: relative;
+}
+
+.consejo-shape img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 75px / 30px;
+}
+/* Estilos para el contenedor que tiene la imagen y la descripción */
+.consejo-shape {
+    position: relative;
+    cursor: pointer; /* Cambia el cursor para indicar que es interactivo */
+}
+
+/* Oculta la descripción por defecto */
+.consejo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo semi-transparente */
+    color: white;
+    font-size: 0.9em;
+    padding: 10px;
+    box-sizing: border-box;
+    opacity: 0; /* Lo hace invisible */
+    transition: opacity 0.3s ease; /* Transición suave */
+    border-radius: 75px / 30px; /* Para que coincida con la forma ovalada */
+}
+
+/* Oculta la imagen y muestra la descripción al pasar el cursor */
+.consejo-shape:hover .consejo-overlay {
+    opacity: 1; /* Lo hace visible */
+}
+
+/* Oculta la imagen al pasar el cursor */
+.consejo-shape:hover img {
+    opacity: 0; /* Lo hace invisible */
+}
