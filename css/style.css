@@ -496,3 +496,88 @@ header h1 {
 .consejo-shape:hover img {
     opacity: 0; /* Lo hace invisible */
 }
+/* ======================== */
+/* Sección Herramientas    */
+/* ======================== */
+.herramientas-section {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+/* Estilo para el marco superior */
+.herramientas-intro-box {
+    border: 2px solid #ccc;
+    padding: 20px;
+    margin: 0 auto 50px auto;
+    max-width: 800px;
+}
+
+.herramientas-intro-box h2 {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+}
+
+.herramientas-intro-box p {
+    font-size: 1.1rem;
+    color: #555;
+}
+
+/* Estilos para el contenedor de los 3 elementos */
+.herramientas-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    align-items: center;
+}
+
+.herramienta-item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    max-width: 900px;
+    width: 100%;
+    justify-content: center; /* Centra los elementos */
+}
+
+/* Estilo para el círculo de la imagen */
+.herramienta-imagen-circulo {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 50%; /* Esto crea la forma de círculo */
+    border: 3px solid #007bff;
+    flex-shrink: 0;
+}
+
+.herramienta-imagen-circulo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Estilo para el recuadro de texto con esquinas redondeadas */
+.herramienta-texto-cuadro {
+    position: relative;
+    background-color: #f0f0f0;
+    padding: 30px;
+    margin-left: 30px; /* Separación entre el círculo y el cuadro */
+    flex-grow: 1;
+    border: 2px solid;
+    border-color: var(--border-color, #007bff);
+    border-radius: 15px; /* ¡Esquinas redondeadas! */
+}
+
+/* Media query para móviles */
+@media (max-width: 768px) {
+    .herramienta-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    .herramienta-texto-cuadro {
+        margin-left: 0;
+        margin-top: 20px;
+    }
+    .herramienta-imagen-circulo {
+        margin: 0;
+    }
+}
