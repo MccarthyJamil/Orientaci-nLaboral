@@ -581,3 +581,21 @@ header h1 {
         margin: 0;
     }
 }
+/* Regla específica para el logo en la página de Empleabilidad */
+#empleabilidad-page .site-logo {
+    position: absolute; /* Saca el logo del flujo normal */
+    height: 100px; /* Tamaño del logo. Cambia este valor */
+    width: auto;
+    
+    top: 20px;   /* Posición desde arriba. Ajusta este valor para moverlo abajo */
+    left: 240px;  /* Posición desde la izquierda. Ajusta este valor para moverlo a la derecha */
+}
+/* Regla específica para el logo en la página de Herramientas */
+#herramientas-page .site-logo {
+    position: absolute; /* Saca el logo del flujo normal */
+    height: 100px; /* Tamaño del logo. Cambia este valor */
+    width: auto;
+    
+    top: 20px;   /* Posición desde arriba. Ajusta este valor para moverlo abajo */
+    left: 240px;  /* Posición desde la izquierda. Ajusta este valor para moverlo a la derecha */
+}
