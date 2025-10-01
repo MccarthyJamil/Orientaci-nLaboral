@@ -484,7 +484,7 @@ header h1 {
     box-sizing: border-box;
     opacity: 0; /* Lo hace invisible */
     transition: opacity 0.3s ease; /* Transición suave */
-    border-radius: 75px / 30px; /* Para que coincida con la forma ovalada */
+    border-radius: 20px/* Para que coincida con la forma ovalada */
 }
 
 /* Oculta la imagen y muestra la descripción al pasar el cursor */
@@ -496,106 +496,96 @@ header h1 {
 .consejo-shape:hover img {
     opacity: 0; /* Lo hace invisible */
 }
-/* ======================== */
-/* Sección Herramientas    */
-/* ======================== */
-.herramientas-section {
-    padding: 50px 20px;
+/* ==================================== */
+/* Sección de Empleabilidad (Diseño)    */
+/* ==================================== */
+
+.consejos-container {
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
     text-align: center;
 }
 
-/* Estilo para el marco superior */
-.herramientas-intro-box {
-    border: 2px solid #ccc;
-    padding: 20px;
-    margin: 0 auto 50px auto;
-    max-width: 800px;
+.consejos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    justify-content: center;
 }
 
-.herramientas-intro-box h2 {
-    font-size: 2.2rem;
-    margin-bottom: 10px;
-}
-
-.herramientas-intro-box p {
-    font-size: 1.1rem;
-    color: #555;
-}
-
-/* Estilos para el contenedor de los 3 elementos */
-.herramientas-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
-    align-items: center;
-}
-
-.herramienta-item {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    max-width: 900px;
-    width: 100%;
-    justify-content: center; /* Centra los elementos */
-}
-
-/* Estilo para el círculo de la imagen */
-.herramienta-imagen-circulo {
-    width: 150px;
-    height: 150px;
+.consejo-item {
+    position: relative;
     overflow: hidden;
-    border-radius: 50%; /* Esto crea la forma de círculo */
-    border: 3px solid #007bff;
-    flex-shrink: 0;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    aspect-ratio: 2 / 1; /* Cuadros anchos horizontalmente */
 }
 
-.herramienta-imagen-circulo img {
+.consejo-item:hover {
+    transform: translateY(-5px);
+}
+
+.consejo-item img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* Esta es la propiedad clave */
 }
 
-/* Estilo para el recuadro de texto con esquinas redondeadas */
-.herramienta-texto-cuadro {
-    position: relative;
-    background-color: #f0f0f0;
-    padding: 30px;
-    margin-left: 30px; /* Separación entre el círculo y el cuadro */
-    flex-grow: 1;
-    border: 2px solid;
-    border-color: var(--border-color, #007bff);
-    border-radius: 15px; /* ¡Esquinas redondeadas! */
+.consejo-item:hover .consejo-shape img,
+.consejo-item:hover img {
+    transform: scale(1.05);
 }
 
-/* Media query para móviles */
+.consejo-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.consejo-item:hover .consejo-overlay {
+    opacity: 1;
+}
+
+.consejo-text {
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 0;
+    margin: 0;
+}
+
+/* Ajustes para móviles */
 @media (max-width: 768px) {
-    .herramienta-item {
-        flex-direction: column;
-        text-align: center;
-    }
-    .herramienta-texto-cuadro {
-        margin-left: 0;
-        margin-top: 20px;
-    }
-    .herramienta-imagen-circulo {
-        margin: 0;
+    .consejos-grid {
+        grid-template-columns: 1fr;
     }
 }
-/* Regla específica para el logo en la página de Empleabilidad */
-#empleabilidad-page .site-logo {
-    position: absolute; /* Saca el logo del flujo normal */
-    height: 100px; /* Tamaño del logo. Cambia este valor */
-    width: auto;
-    
-    top: 20px;   /* Posición desde arriba. Ajusta este valor para moverlo abajo */
-    left: 240px;  /* Posición desde la izquierda. Ajusta este valor para moverlo a la derecha */
+/* ==================================== */
+/* Ajuste del Logo en el Encabezado     */
+/* ==================================== */
+/* ==================================== */
+/* Diseño del Encabezado y el Logo      */
+/* ==================================== */
+
+.logo-container {
+    display: flex; /* Convierte el contenedor en un flexbox */
+    align-items: center; /* Centra verticalmente el logo y el título */
+    gap: 200px; /* Crea un espacio entre el logo y el título */
 }
-/* Regla específica para el logo en la página de Herramientas */
-#herramientas-page .site-logo {
-    position: absolute; /* Saca el logo del flujo normal */
-    height: 100px; /* Tamaño del logo. Cambia este valor */
-    width: auto;
-    
-    top: 20px;   /* Posición desde arriba. Ajusta este valor para moverlo abajo */
-    left: 240px;  /* Posición desde la izquierda. Ajusta este valor para moverlo a la derecha */
+
+.site-logo {
+    width: 80px;
+    height: auto;
+    transform: translateY(5px); /* Esto lo moverá 10 píxeles hacia abajo */
+}
+.section-title {
+    font-family: 'Scripter', cursive;
 }
