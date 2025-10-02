@@ -589,3 +589,19 @@ header h1 {
 .section-title {
     font-family: 'Scripter', cursive;
 }
+/* Estilos para la animación al hacer scroll */
+.consejo-group {
+    /* Estado final y visible */
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.consejo-group.hidden {
+    /* Estado inicial y oculto */
+    opacity: 0;
+    transform: translateY(20px);
+}
+.spacer {
+    height: 50vh; /* Puedes ajustar este valor */
+}
