@@ -320,19 +320,19 @@ nav a.active {
 
 /* 1. REGLAS PARA EL BORDE DE COLOR (Utilizando el índice de los grupos) */
 .consejo-group:nth-child(1) .consejo-item {
-    border-color: #5d9baf; /* Azul claro para el primer consejo */
+    border-color: #cc779d; /* Azul claro para el primer consejo */
 }
 
 .consejo-group:nth-child(2) .consejo-item {
-    border-color: #cc779d; /* Rosa/Fucsia para el segundo consejo */
+    border-color: #d7d4fa; /* Rosa/Fucsia para el segundo consejo */
 }
 
 .consejo-group:nth-child(3) .consejo-item {
-    border-color: #f7963d; /* Naranja/Ámbar para el tercero */
+    border-color: #f29d58; /* Naranja/Ámbar para el tercero */
 }
 
 .consejo-group:nth-child(4) .consejo-item {
-    border-color: #1a535c; /* Azul oscuro para el cuarto */
+    border-color: #c7e0fd; /* Azul oscuro para el cuarto */
 }
 
 
@@ -468,4 +468,90 @@ nav a.active {
 
 .next-btn {
     right: 10px;
+}
+/* ==================================== */
+/* 9. Estilos de la Sección de Herramientas */
+/* ==================================== */
+.herramientas-section {
+    padding: 20px;
+    text-align: center; /* Centra el título y la descripción principal */
+}
+
+.herramientas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsivo, 2-3 columnas */
+    gap: 40px; /* Espacio entre las tarjetas de herramientas */
+    max-width: 900px; /* Ancho máximo para la cuadrícula */
+    margin: 40px auto; /* Centra la cuadrícula */
+}
+
+.herramienta-item {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 15px; /* Bordes ligeramente redondeados para la tarjeta completa */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.herramienta-item:hover {
+    transform: translateY(-10px); /* Efecto al pasar el cursor */
+}
+
+.herramienta-item h3 {
+    color: #1a535c;
+    font-size: 1.6em;
+    margin-bottom: 15px;
+}
+
+.herramienta-item p {
+    color: #555;
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.herramienta-media {
+    width: 100%; /* El contenedor ocupa todo el ancho disponible */
+    padding-top: 56.25%; /* Relación de aspecto 16:9 para la imagen */
+    position: relative;
+    overflow: hidden; /* Importante para el border-radius de la imagen */
+    border-radius: 15px; /* Bordes circulares para el contenedor de la imagen */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.herramienta-media img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* ¡CAMBIO CLAVE! Mantiene la imagen completa sin recortar */
+    object-fit: contain; 
+    
+    display: block;
+    border-radius: 15px;
+    /* Agregamos el color de fondo de la tarjeta para llenar el espacio vacío de 'contain' */
+    background-color: #ffffff; 
+}
+/* Media query para dispositivos móviles */
+@media (max-width: 768px) {
+    .herramientas-grid {
+        grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
+        gap: 30px;
+        margin: 20px auto;
+    }
+
+    .herramienta-item {
+        padding: 20px;
+    }
+
+    .herramienta-item h3 {
+        font-size: 1.4em;
+    }
+
+    .herramienta-item p {
+        font-size: 1em;
+    }
 }
