@@ -254,7 +254,10 @@ nav a.active {
 .consejo-item {
     position: relative;
     overflow: hidden;
-    border-radius: 20px;
+    border-radius: 20px; /* Borde redondeado del recuadro principal */
+    
+    /* PROPIEDAD CLAVE PARA EL BORDE DE COLOR */
+    border: 10px solid transparent; /* El color real se define abajo (.consejo-1, etc.) */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     aspect-ratio: 2 / 1;
@@ -280,14 +283,17 @@ nav a.active {
     color: #fff;
     padding: 15px;
     text-align: center;
+    
+    /* SOLUCIÓN AL CORTE EN ESQUINAS Y CENTRADO */
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column; /* Centrado vertical y flujo */
+    justify-content: center; 
+    align-items: center; 
+    
     opacity: 0;
     transition: opacity 0.3s ease;
-    border-radius: 20px;
+    border-radius: 20px; /* CLAVE: Coincide con el redondeado del .consejo-item */
 }
-
 .consejo-item:hover .consejo-overlay {
     opacity: 1;
 }
@@ -308,6 +314,36 @@ nav a.active {
 .consejo-group.hidden {
     opacity: 0;
     transform: translateY(20px);
+}
+
+/* Agrega estas reglas al final de la Sección 7 (después de .consejo-group.hidden) */
+
+/* 1. REGLAS PARA EL BORDE DE COLOR (Utilizando el índice de los grupos) */
+.consejo-group:nth-child(1) .consejo-item {
+    border-color: #5d9baf; /* Azul claro para el primer consejo */
+}
+
+.consejo-group:nth-child(2) .consejo-item {
+    border-color: #cc779d; /* Rosa/Fucsia para el segundo consejo */
+}
+
+.consejo-group:nth-child(3) .consejo-item {
+    border-color: #f7963d; /* Naranja/Ámbar para el tercero */
+}
+
+.consejo-group:nth-child(4) .consejo-item {
+    border-color: #1a535c; /* Azul oscuro para el cuarto */
+}
+
+
+/* 2. SOLUCIÓN FINAL AL TEXTO CORTADO Y MAL POSICIONADO */
+/* Esta regla es vital para que el párrafo interno use todo el espacio y el centrado funcione. */
+.consejo-overlay .descripcion-consejo {
+    width: 100%; /* CLAVE: Asegura que el párrafo ocupe el ancho completo */
+    margin: 0; /* Elimina márgenes extra */
+    padding: 0 9px; /* Pequeño padding horizontal para que el texto no se pegue al borde (opcional) */
+    line-height: 1.4; 
+    font-weight: bold;
 }
 
 /* ==================================== */
