@@ -533,7 +533,7 @@ nav a.active {
     display: block;
     border-radius: 15px;
     /* Agregamos el color de fondo de la tarjeta para llenar el espacio vacío de 'contain' */
-    background-color: #ffffff; 
+    background-color: #fdf4b7; 
 }
 /* Media query para dispositivos móviles */
 @media (max-width: 768px) {
