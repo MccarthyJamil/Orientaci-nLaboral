@@ -48,6 +48,12 @@ app.post('/api/contador/descargar', async (req, res) => {
         res.status(500).json({ error: 'Error al incrementar el contador.' });
     }
 });
+// RUTA DE PING (Keep-Alive)
+// ================================================================
+app.get('/api/ping', (req, res) => {
+    // Devuelve una respuesta simple para mantener el servidor despierto
+    res.status(200).send('pong');
+});
 
 app.listen(port, () => {
     console.log(`API del contador corriendo en http://localhost:${port}`);
