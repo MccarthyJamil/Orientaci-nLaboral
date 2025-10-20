@@ -22,22 +22,34 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ===========================================
-    // 2. LÓGICA DEL CONTADOR PERSISTENTE (NUEVA)
+    // 2. LÓGICA DEL CONTADOR PERSISTENTE (Solución al "---")
     // ===========================================
     const downloadButton = document.getElementById('download-button');
     const contadorNumero = document.getElementById('contador-numero');
 
-    // !!! REEMPLAZA ESTA URL CON LA URL FINAL DE TU SERVICIO EN RENDER !!!
-    const API_BASE_URL = 'https://api-contador-zenr.onrender.com'; 
+    // AJUSTE CLAVE: Asegúrate que la ruta sea '/api/contador' como en el server.js
+    const API_BASE_URL = 'https://api-contador-zenr.onrender.com/api/contador'; 
 
 
     // FUNCIÓN PARA CARGAR EL CONTADOR AL INICIO
     async function loadCounter() {
-        if (!contadorNumero) return; // Salir si el elemento no existe
+        if (!contadorNumero) return; 
+
+        // PASO CLAVE 1: Muestra un mensaje amigable inmediatamente
+        contadorNumero.textContent = 'Cargando...'; 
+
+        // Inicializa el controlador para el timeout
+        const controller = new AbortController();
+        // 15 segundos de timeout para manejar la latencia de Render
+        const timeoutId = setTimeout(() => controller.abort(), 15000); 
 
         try {
-            // Llama a la ruta GET para obtener el valor guardado en MongoDB
-            const response = await fetch(`${API_BASE_URL}/get-count`);
+            // Llama a la ruta GET
+            const response = await fetch(`${API_BASE_URL}/get-count`, { 
+                signal: controller.signal // Aplica el timeout a la petición
+            });
+            
+            clearTimeout(timeoutId); // Limpia el timeout si llega la respuesta
             
             if (!response.ok) {
                  throw new Error(`Error HTTP: ${response.status}`);
@@ -46,24 +58,31 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
             
             if (data.count !== undefined) {
-                // Actualiza el número visible en la página
+                // Éxito: Muestra el número real
                 contadorNumero.textContent = data.count;
             }
         } catch (error) {
             console.error('❌ Error al cargar el contador desde el API:', error);
-            // Muestra un valor por defecto o un mensaje de error si falla
-            contadorNumero.textContent = '---'; 
+            
+            // PASO CLAVE 2: Si la carga falla por timeout o error, muestra 0 o sigue en "Cargando..."
+            if (error.name === 'AbortError' || error.message.includes('timeout')) {
+                 // Si falla por tiempo de espera de Render, mantenemos el mensaje de carga
+                 // O mostramos el 0 inicial
+                 contadorNumero.textContent = '0'; 
+            } else {
+                 // Si falla por otra razón (ej: URL errónea), muestra 0
+                 contadorNumero.textContent = '0'; 
+            }
         }
     }
 
 
     // FUNCIÓN PARA INCREMENTAR EL CONTADOR AL CLIC
     if (downloadButton) {
-        downloadButton.addEventListener('click', async (event) => {
-            // Nota: Aquí no usamos event.preventDefault() para no detener la descarga de la guía
+        downloadButton.addEventListener('click', async () => {
             
             try {
-                // Llama a la ruta POST para incrementar el valor en MongoDB
+                // Llama a la ruta POST para incrementar (esta siempre funcionará si el servidor está activo)
                 const response = await fetch(`${API_BASE_URL}/descargar`, {
                     method: 'POST',
                     headers: {
@@ -73,7 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (response.ok) {
                     const data = await response.json();
-                    // Actualiza el número visible con el valor que devuelve la BD
                     contadorNumero.textContent = data.newCount; 
                 } else {
                     console.error('El API devolvió un error al incrementar.');
@@ -82,7 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (error) {
                 console.error('❌ Error de conexión al intentar incrementar:', error);
             }
-            // Después del fetch, la descarga del archivo (si el botón tiene el atributo 'download') continúa
         });
     }
 
