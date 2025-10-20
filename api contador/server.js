@@ -1,51 +1,50 @@
 const express = require('express');
 const cors = require('cors');
-const fs = require('fs'); // Módulo de Node.js para trabajar con archivos
+const mongoose = require('mongoose'); // Nuevo: Módulo para MongoDB
+const Counter = require('./models/Counter'); // Nuevo: Tu modelo de datos
 
 const app = express();
-const port = 3000;
+// Configura el puerto para Render
+const port = process.env.PORT || 3000; 
 
 app.use(cors());
+// Permite que Express lea JSON
+app.use(express.json());
 
-// Define el archivo donde se guardará el contador
-const COUNTER_FILE = 'contador.json';
+// **REEMPLAZA ESTA CADENA** con tu URI de Atlas
+const MONGO_URI = 'mongodb+srv://mccarthy:Holagrupo17@descargas.d1wwjva.mongodb.net/?retryWrites=true&w=majority&appName=descargas'; 
 
-// Si el archivo no existe, lo crea con un contador inicial de 0
-if (!fs.existsSync(COUNTER_FILE)) {
-    fs.writeFileSync(COUNTER_FILE, JSON.stringify({ count: 0 }));
-}
+// Conexión a la base de datos
+mongoose.connect(MONGO_URI)
+    .then(() => console.log('✅ Conectado a MongoDB Atlas.'))
+    .catch(err => {
+        console.error('❌ Error de conexión a MongoDB:', err);
+    });
 
-// Función para leer el contador del archivo
-function getCount() {
-    const data = fs.readFileSync(COUNTER_FILE);
-    return JSON.parse(data).count;
-}
-
-// Función para guardar el nuevo valor del contador en el archivo
-function saveCount(count) {
-    fs.writeFileSync(COUNTER_FILE, JSON.stringify({ count }));
-}
-
-// Punto de entrada para obtener el contador
-app.get('/api/contador', (req, res) => {
+// RUTA 1: OBTENER el contador (GET)
+app.get('/api/contador/get-count', async (req, res) => {
     try {
-        const count = getCount();
-        res.json({ count });
+        const counter = await Counter.findOne({ name: 'guia_descargas' });
+        res.status(200).json({ count: counter ? counter.count : 0 }); 
     } catch (error) {
-        console.error('Error al obtener el contador:', error);
         res.status(500).json({ error: 'Error al obtener el contador.' });
     }
 });
 
-// Punto de entrada para INCREMENTAR el contador
-app.get('/api/incrementar', (req, res) => {
+// RUTA 2: INCREMENTAR el contador (POST)
+app.post('/api/contador/descargar', async (req, res) => {
     try {
-        const currentCount = getCount();
-        const newCount = currentCount + 1;
-        saveCount(newCount);
-        res.status(200).json({ message: 'Contador incrementado.', count: newCount });
+        const updatedCounter = await Counter.findOneAndUpdate(
+            { name: 'guia_descargas' },
+            { $inc: { count: 1 } },
+            { new: true, upsert: true } 
+        );
+        
+        res.status(200).json({ 
+            message: 'Contador incrementado y guardado en la BD.', 
+            newCount: updatedCounter.count 
+        });
     } catch (error) {
-        console.error('Error al incrementar el contador:', error);
         res.status(500).json({ error: 'Error al incrementar el contador.' });
     }
 });
