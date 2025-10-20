@@ -1,5 +1,5 @@
 // =================================================================
-// 1. LÓGICA DEL CONTADOR: Variables y Funciones Globales (SOLUCIÓN A NAVEGACIÓN)
+// 1. LÓGICA DEL CONTADOR: Variables y Funciones Globales (SOLUCIÓN A LATENCIA)
 // =================================================================
 
 // Mover variables y funciones fuera de DOMContentLoaded para hacerlas globales
@@ -14,12 +14,12 @@ const API_BASE_URL = 'https://api-contador-zenr.onrender.com/api/contador';
 async function loadCounter() {
     if (!contadorNumero) return; 
     
-    // Muestra 'Cargando...' inmediatamente para mejor UX
+    // Muestra 'Cargando...' inmediatamente
     contadorNumero.textContent = 'Cargando...'; 
 
     const controller = new AbortController();
-    // 15 segundos de timeout para manejar el modo "sleep" de Render
-    const timeoutId = setTimeout(() => controller.abort(), 15000); 
+    // Aumentamos el tiempo de espera a 20 segundos para darle tiempo a Render
+    const timeoutId = setTimeout(() => controller.abort(), 20000); 
 
     try {
         const response = await fetch(`${API_BASE_URL}/get-count`, { 
@@ -39,10 +39,11 @@ async function loadCounter() {
             contadorNumero.textContent = data.count;
         }
     } catch (error) {
-        console.error('❌ Error al cargar el contador desde el API:', error);
+        // Si falla por timeout (Render dormido) o error, mantenemos el mensaje de 'Cargando...'
+        console.warn('⚠️ Falló la carga inicial (Probablemente Render estaba dormido).');
+        contadorNumero.textContent = 'Cargando...'; 
         
-        // Si falla por timeout, 404, o error de servidor, muestra 0
-        contadorNumero.textContent = '0'; 
+        // El siguiente refresco o clic en el botón de descarga corregirá el valor.
     }
 }
 
@@ -106,7 +107,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     // ================================================================
-
 
     // Ejecución inicial: carga el contador cuando el DOM está listo
     loadCounter();
