@@ -15,7 +15,7 @@ async function loadCounter() {
     if (!contadorNumero) return; 
     
     // Muestra 'Cargando...' inmediatamente
-    contadorNumero.textContent = 'Puedes descargar :)'; 
+    contadorNumero.textContent = 'Cargando...'; 
 
     const controller = new AbortController();
     // Aumentamos el tiempo de espera a 20 segundos para darle tiempo a Render
@@ -41,7 +41,7 @@ async function loadCounter() {
     } catch (error) {
         // Si falla por timeout (Render dormido) o error, mantenemos el mensaje de 'Cargando...'
         console.warn('⚠️ Falló la carga inicial (Probablemente Render estaba dormido).');
-        contadorNumero.textContent = 'Cargando...'; 
+        contadorNumero.textContent = 'Puedes descargar :)'; 
         
         // El siguiente refresco o clic en el botón de descarga corregirá el valor.
     }
