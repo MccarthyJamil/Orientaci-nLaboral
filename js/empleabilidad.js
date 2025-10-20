@@ -15,7 +15,7 @@ async function loadCounter() {
     if (!contadorNumero) return; 
     
     // Muestra 'Cargando...' inmediatamente
-    contadorNumero.textContent = 'Cargando...'; 
+    contadorNumero.textContent = 'Puedes descargar :)'; 
 
     const controller = new AbortController();
     // Aumentamos el tiempo de espera a 20 segundos para darle tiempo a Render
