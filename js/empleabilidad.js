@@ -1,22 +1,24 @@
 // =================================================================
-// 1. LÓGICA DEL CONTADOR: Variables y Funciones Globales
+// 1. LÓGICA DEL CONTADOR: Variables y Funciones Globales (SOLUCIÓN A NAVEGACIÓN)
 // =================================================================
 
 // Mover variables y funciones fuera de DOMContentLoaded para hacerlas globales
 const downloadButton = document.getElementById('download-button');
 const contadorNumero = document.getElementById('contador-numero');
+
 // La URL es correcta: 'https://api-contador-zenr.onrender.com/api/contador'
 const API_BASE_URL = 'https://api-contador-zenr.onrender.com/api/contador'; 
 
 
-// FUNCIÓN PARA CARGAR EL CONTADOR (Definición Global y con Timeout)
+// FUNCIÓN PARA CARGAR EL CONTADOR (Definición Global, Manejo de Latencia/Timeout)
 async function loadCounter() {
     if (!contadorNumero) return; 
     
-    // Muestra 'Cargando...' inmediatamente
+    // Muestra 'Cargando...' inmediatamente para mejor UX
     contadorNumero.textContent = 'Cargando...'; 
 
     const controller = new AbortController();
+    // 15 segundos de timeout para manejar el modo "sleep" de Render
     const timeoutId = setTimeout(() => controller.abort(), 15000); 
 
     try {
@@ -39,7 +41,7 @@ async function loadCounter() {
     } catch (error) {
         console.error('❌ Error al cargar el contador desde el API:', error);
         
-        // Si falla por timeout o error de servidor, muestra 0
+        // Si falla por timeout, 404, o error de servidor, muestra 0
         contadorNumero.textContent = '0'; 
     }
 }
@@ -92,19 +94,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Ejecución inicial: carga el contador cuando la página se carga por primera vez
+    // ================================================================
+    // SOLUCIÓN CLAVE: Detectar el Clic en el Enlace de Navegación
+    // ================================================================
+    const linkEmpleabilidad = document.getElementById('link-empleabilidad');
+
+    if (linkEmpleabilidad) {
+        linkEmpleabilidad.addEventListener('click', () => {
+            // Al hacer clic, forzamos la recarga del contador ANTES de navegar
+            loadCounter();
+        });
+    }
+    // ================================================================
+
+
+    // Ejecución inicial: carga el contador cuando el DOM está listo
     loadCounter();
 });
 
 
 // =================================================================
-// 3. EVENTO CLAVE: Solución al Problema de Navegación Interna
+// 3. EVENTO DE RESPALDO: Solución para Botón Atrás/Adelante
 // =================================================================
 
-// Este evento se dispara cada vez que la página de Empleabilidad se muestra,
-// incluyendo cuando el usuario navega hacia atrás o adelante, lo que soluciona el problema del '0'.
+// Este evento se dispara si el usuario usa los botones Atrás/Adelante del navegador
 window.addEventListener('pageshow', (event) => {
-    // Si la página fue recuperada del caché (al navegar), forzamos la recarga del contador.
+    // Si la página fue recuperada del caché (al navegar), forzamos la recarga.
     if (event.persisted) {
         loadCounter();
     }
